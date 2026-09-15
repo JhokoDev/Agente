@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Chat API</string>
+    <string name="chat_title">Agent Core</string>
+    <string name="clear_chat">Limpar conversa</string>
+    <string name="clear_chat_title">Limpar conversa</string>
+    <string name="clear_chat_confirmation">Deseja apagar o histórico da conversa?</string>
+    <string name="clear_chat_confirm">Apagar</string>
+    <string name="clear_chat_remote_error">Não foi possível limpar o histórico no servidor.</string>
+    <string name="status_clearing">Limpando histórico...</string>
+    <string name="welcome_title">Olá! Como posso ajudar?</string>
+    <string name="welcome_subtitle">Envie uma mensagem para iniciar uma conversa com a API FastAPI.</string>
+    <string name="input_placeholder">Digite uma mensagem...</string>
+    <string name="send_description">Enviar mensagem</string>
+    <string name="retry_action">Tentar novamente</string>
+    <string name="token_missing_warning">Token não configurado. Adicione CHAT_API_TOKEN no arquivo local.properties ou configure abaixo.</string>
+    <string name="token_config_title">Configuração do Token</string>
+    <string name="token_config_desc">Informe o token de autenticação Bearer para conectar com a API FastAPI.</string>
+    <string name="save_token">Salvar Token</string>
+    <string name="cancel">Cancelar</string>
+    <string name="close">Fechar</string>
+    <string name="status_connected">Conectado</string>
+    <string name="status_no_token">Token pendente</string>
+    <string name="status_thinking">Pensando...</string>
+    <string name="error_auth">Erro de autenticação (401/403): token ausente ou inválido. Verifique o CHAT_API_TOKEN no arquivo local.properties.</string>
+    <string name="error_network">Falha de conexão com a API. Verifique sua conexão de rede e tente novamente.</string>
+    <string name="error_timeout">Tempo limite esgotado ao aguardar resposta da API.</string>
+    <string name="error_server">Erro no servidor da API (HTTP %1$d). Tente novamente mais tarde.</string>
+    <string name="error_unknown">Ocorreu um erro inesperado ao processar a mensagem.</string>
+</resources>

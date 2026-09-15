@@ -1,11 +1,17 @@
-<div align="center">
+# Chat API - Android App
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Cliente nativo Android estilo ChatGPT em **Kotlin**, **Jetpack Compose** e **Material 3** para comunicação com a API FastAPI.
 
-  <h1>Built with AI Studio</h2>
+## Configuração do Token de Desenvolvimento
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+Para que o aplicativo se autentique com sucesso na API, adicione a seguinte linha no arquivo `local.properties` na raiz do projeto:
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+```properties
+CHAT_API_TOKEN=COLE_SEU_TOKEN_AQUI
+```
 
-</div>
+Substitua `COLE_SEU_TOKEN_AQUI` pelo seu token de autenticação real.
+
+### Notas de Segurança:
+- O arquivo `local.properties` está configurado no `.gitignore` e não deve ser versionado.
+- Caso o token não seja fornecido ou mantenha o valor padrão de exemplo, a tela principal exibirá um aviso explicativo e permitirá também inserir/atualizar o token diretamente na interface do app.
