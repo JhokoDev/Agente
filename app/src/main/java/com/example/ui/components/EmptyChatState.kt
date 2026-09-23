@@ -1,9 +1,7 @@
 package com.example.ui.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,12 +11,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.AutoAwesome
-import androidx.compose.material.icons.filled.ChatBubbleOutline
-import androidx.compose.material.icons.filled.Code
+import androidx.compose.material.icons.filled.Checklist
 import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -28,12 +26,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.R
 
 @Composable
@@ -41,34 +39,27 @@ fun EmptyChatState(
     onPromptSelected: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val suggestionConcept = stringResource(R.string.suggestion_concept)
+    val suggestionIdea = stringResource(R.string.suggestion_idea)
+    val suggestionPlan = stringResource(R.string.suggestion_plan)
+
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(24.dp),
+            .padding(horizontal = 24.dp, vertical = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Box(
-            modifier = Modifier
-                .size(64.dp)
-                .clip(CircleShape)
-                .background(MaterialTheme.colorScheme.primaryContainer),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                imageVector = Icons.Default.AutoAwesome,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(32.dp)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
+        AgentAvatar(
+            size = 56.dp,
+            modifier = Modifier.padding(bottom = 20.dp)
+        )
 
         Text(
             text = stringResource(R.string.welcome_title),
             style = MaterialTheme.typography.headlineSmall.copy(
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                letterSpacing = (-0.5).sp
             ),
             color = MaterialTheme.colorScheme.onSurface,
             textAlign = TextAlign.Center
@@ -78,44 +69,40 @@ fun EmptyChatState(
 
         Text(
             text = stringResource(R.string.welcome_subtitle),
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodyMedium.copy(
+                lineHeight = 22.sp
+            ),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 16.dp)
+            modifier = Modifier.padding(horizontal = 20.dp)
         )
 
-        Spacer(modifier = Modifier.height(28.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
-        Text(
-            text = "Sugestões de conversa:",
-            style = MaterialTheme.typography.labelLarge.copy(
-                fontWeight = FontWeight.Medium,
-                color = MaterialTheme.colorScheme.primary
-            ),
-            modifier = Modifier.padding(bottom = 12.dp)
-        )
+        Column(
+            modifier = Modifier
+                .widthIn(max = 380.dp)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            PromptSuggestionCard(
+                icon = Icons.Default.AutoAwesome,
+                text = suggestionConcept,
+                onClick = { onPromptSelected(suggestionConcept) }
+            )
 
-        PromptSuggestionCard(
-            icon = Icons.Default.ChatBubbleOutline,
-            text = "Olá! Pode me dar um resumo sobre você?",
-            onClick = { onPromptSelected("Olá! Pode me dar um resumo sobre você?") }
-        )
+            PromptSuggestionCard(
+                icon = Icons.Default.Lightbulb,
+                text = suggestionIdea,
+                onClick = { onPromptSelected(suggestionIdea) }
+            )
 
-        Spacer(modifier = Modifier.height(8.dp))
-
-        PromptSuggestionCard(
-            icon = Icons.Default.Code,
-            text = "Como criar um endpoint assíncrono em FastAPI?",
-            onClick = { onPromptSelected("Como criar um endpoint assíncrono em FastAPI?") }
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        PromptSuggestionCard(
-            icon = Icons.Default.Lightbulb,
-            text = "Me dê 3 ideias inovadoras para um aplicativo mobile.",
-            onClick = { onPromptSelected("Me dê 3 ideias inovadoras para um aplicativo mobile.") }
-        )
+            PromptSuggestionCard(
+                icon = Icons.Default.Checklist,
+                text = suggestionPlan,
+                onClick = { onPromptSelected(suggestionPlan) }
+            )
+        }
     }
 }
 
@@ -130,12 +117,15 @@ private fun PromptSuggestionCard(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainerLow
         ),
-        shape = RoundedCornerShape(12.dp),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+        shape = RoundedCornerShape(16.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 14.dp)
         ) {
             Icon(
                 imageVector = icon,
@@ -146,9 +136,19 @@ private fun PromptSuggestionCard(
             Spacer(modifier = Modifier.width(12.dp))
             Text(
                 text = text,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    fontWeight = FontWeight.Medium
+                ),
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.weight(1f)
+            )
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
+                modifier = Modifier.size(16.dp)
             )
         }
     }
 }
+
